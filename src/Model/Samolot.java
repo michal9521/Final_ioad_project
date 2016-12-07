@@ -16,6 +16,8 @@ public abstract class Samolot {
 	protected MiejsceParkingowe parkingRef;
 	protected status status;
 	protected List<MiejsceWSamolocie> listaMiejsc;
+	protected String miasto;
+	protected int idLotu;
 	
 	public Samolot(String id) {
 		this.idSamolotu = id;
@@ -23,6 +25,16 @@ public abstract class Samolot {
 		this.status = status.gotowyDoLotu;
 		System.out.println(this.status.toString());
 		this.parkingRef = new MiejsceParkingowe(3, 'A');
+	}
+	
+	public Samolot(String id, String miasto, int idLotu) {
+		this.idSamolotu = id;
+		this.listaMiejsc = new ArrayList<MiejsceWSamolocie>();
+		this.status = status.gotowyDoLotu;
+		System.out.println(this.status.toString());
+		this.parkingRef = new MiejsceParkingowe(3, 'A');
+		this.miasto = miasto;
+		this.idLotu = idLotu;
 	}
 	
 	public void InitMiejsca(int iloscBiznes, int iloscEko){
@@ -95,6 +107,14 @@ public abstract class Samolot {
 	
 	public MiejsceParkingowe getMiejsceParkingowe() {
 		return this.parkingRef;
+	}
+	
+	public String getMiasto() {
+		return this.miasto;
+	}
+	
+	public int getIdLotu() {
+		return this.idLotu;
 	}
 	
 //	public void getWolneMiejscaWSamolocie() {

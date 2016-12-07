@@ -9,6 +9,7 @@ public class Program {
 		System.out.println("Hello Katy!");
 		ZarzadzanieSamolotami zarzadzanie = new ZarzadzanieSamolotami();
 		zarzadzanie.AddPlanes();
+		zarzadzanie.PrzylatujaceSamoloty();
 		PanelZarzadzania okno = new PanelZarzadzania(zarzadzanie);
 		MySQLAccess db = new MySQLAccess();
 	}

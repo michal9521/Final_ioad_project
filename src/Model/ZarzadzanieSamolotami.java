@@ -7,10 +7,12 @@ public class ZarzadzanieSamolotami {
 	private static final Object[][] String = null;
 	private List<Samolot> listaSamolotow;
 	private List<MiejsceParkingowe> listaMiejscParkingowych;
+	private List<Samolot> przylatujaceSamoloty;
 	
 	public ZarzadzanieSamolotami() {
 		this.listaSamolotow = new ArrayList<Samolot>();
 		this.listaMiejscParkingowych = new ArrayList<MiejsceParkingowe>();
+		this.przylatujaceSamoloty = new ArrayList<Samolot>();
 		InitMiejscaParkingowe();
 	}
 	
@@ -109,19 +111,38 @@ public class ZarzadzanieSamolotami {
 //    	String pom[];
     	String[][] tab = new String[listaSamolotow.size()][];
     	for (int i = 0; i < this.listaSamolotow.size(); i++) {
-    		System.out.println("test");
-		tab[i] = new String []{ this.listaSamolotow.get(i).getId(),
+    			tab[i] = new String []{ this.listaSamolotow.get(i).getId(),
 				this.listaSamolotow.get(i).getNazwaModelu(),
 				Integer.toString(this.listaSamolotow.get(i).getLiczbaMiejscBiznes()),
 				Integer.toString(this.listaSamolotow.get(i).getLiczbaMiejscEko()),
 				Float.toString(this.listaSamolotow.get(i).getCalkowitaWagaBagazu()),
 				Float.toString(this.listaSamolotow.get(i).getCalkowitaWagaPodreczna()),
 				this.listaSamolotow.get(i).getStatusSamolotu().toString(),
-					this.listaSamolotow.get(i).getMiejsceParkingowe().getId()};				
+				this.listaSamolotow.get(i).getMiejsceParkingowe().getId()};				
     	}
 //    	for (int i = 0; i < this.listaSamolotow.size(); i++) {
 //    		String tab[] = 
 //    	}
 		return tab;	
+    }
+    
+    public void PrzylatujaceSamoloty() {
+		Samolot s4 = new Airbus_A319("a04", "Moskwa", 605);
+		Samolot s5 = new Boeing_737("a05", "Warszawa", 100);
+		Samolot s6 = new Tupolew_204("a06", "New York", 043);
+    	this.przylatujaceSamoloty.add(s4);
+    	this.przylatujaceSamoloty.add(s5);
+    	this.przylatujaceSamoloty.add(s6);
+    }
+    public String[][] toTab2() {    	
+    	String[][] tab = new String[przylatujaceSamoloty.size()][];
+    	for (int i = 0; i < this.przylatujaceSamoloty.size(); i++) {
+    		tab[i] = new String[]{
+    				this.przylatujaceSamoloty.get(i).getNazwaModelu(),
+    				this.przylatujaceSamoloty.get(i).getMiasto(),
+    				Integer.toString(this.przylatujaceSamoloty.get(i).getIdLotu())
+    		};
+    	}
+		return tab;
     }
 }

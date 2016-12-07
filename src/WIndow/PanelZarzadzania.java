@@ -48,7 +48,8 @@ public class PanelZarzadzania extends JFrame  implements ActionListener {
     
     String[] columnNames2 = {
     		"Model",
-            "Sk¹d przylatuje"};
+            "Sk¹d przylatuje",
+            "Numer lotu"};
     
     
 	@Override
@@ -67,8 +68,7 @@ public class PanelZarzadzania extends JFrame  implements ActionListener {
 		//setContentPane(mainPanel);
 		//setContentPane(panelNowyBagaz);
 		getContentPane().setLayout(null);
-		String[][] pom = zarzadzanie.toTab();
-	    table1 = new JTable(pom, columnNames1) {
+	    table1 = new JTable(zarzadzanie.toTab(), columnNames1) {
 	        @Override
 	        public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 	            Component component = super.prepareRenderer(renderer, row, column);
@@ -85,7 +85,7 @@ public class PanelZarzadzania extends JFrame  implements ActionListener {
 	    table1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	    table1.setBorder(BorderFactory.createLineBorder(Color.blue));	    
 	    
-	    table2 = new JTable(data2, columnNames2) {
+	    table2 = new JTable(zarzadzanie.toTab2(), columnNames2) {
 	        public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 	            Component component = super.prepareRenderer(renderer, row, column);
 	            int rendererWidth = component.getPreferredSize().width;
