@@ -88,6 +88,7 @@ public class ZarzadzanieSamolotami {
 		Samolot s3 = new Tupolew_204("a03");	
 		this.listaSamolotow.add(s1);
 		this.listaSamolotow.add(s2);
+		Przylot(s3);
 	}
 	
     String[][] columnNames1 ={ {"Plane Id",
@@ -113,8 +114,10 @@ public class ZarzadzanieSamolotami {
 				this.listaSamolotow.get(i).getNazwaModelu(),
 				Integer.toString(this.listaSamolotow.get(i).getLiczbaMiejscBiznes()),
 				Integer.toString(this.listaSamolotow.get(i).getLiczbaMiejscEko()),
+				Float.toString(this.listaSamolotow.get(i).getCalkowitaWagaBagazu()),
+				Float.toString(this.listaSamolotow.get(i).getCalkowitaWagaPodreczna()),
 				this.listaSamolotow.get(i).getStatusSamolotu().toString(),
-					this.listaSamolotow.get(i).getMiejsceParkingowe().toString()};				
+					this.listaSamolotow.get(i).getMiejsceParkingowe().getId()};				
     	}
 //    	for (int i = 0; i < this.listaSamolotow.size(); i++) {
 //    		String tab[] = 

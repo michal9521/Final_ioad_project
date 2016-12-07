@@ -107,17 +107,17 @@ public class PanelZarzadzania extends JFrame  implements ActionListener {
 	    JScrollPane scrollpane2 = new JScrollPane(table2);
 	    
 	    this.add(enterPlaneButton);
-	    this.enterPlaneButton.setBounds(100, 205, 150, 40);
+	    this.enterPlaneButton.setBounds(45, 205, 150, 40);
 	    this.add(scrollpane1);
 	    this.add(scrollpane2);
 	    	    
 	    this.add(table1);
 //	    scrollpane1.getViewport().add(table1);
-	    table1.setBounds(100, 250, 500, 200);
+	    table1.setBounds(45, 250, 600, 200);
 	    
 	    this.add(table2);
 //	    scrollpane2.getViewport().add(table2);
-	    table2.setBounds(100, 0, 500, 200);
+	    table2.setBounds(45, 0, 600, 200);
 
 	}
 
