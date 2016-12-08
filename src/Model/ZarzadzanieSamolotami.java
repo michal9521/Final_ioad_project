@@ -108,8 +108,9 @@ public class ZarzadzanieSamolotami {
 //	};
     
     public String[][] toTab() {
-//    	String pom[];
+    	
     	String[][] tab = new String[listaSamolotow.size()][];
+    	
     	for (int i = 0; i < this.listaSamolotow.size(); i++) {
     			tab[i] = new String []{ this.listaSamolotow.get(i).getId(),
 				this.listaSamolotow.get(i).getNazwaModelu(),
@@ -120,9 +121,6 @@ public class ZarzadzanieSamolotami {
 				this.listaSamolotow.get(i).getStatusSamolotu().toString(),
 				this.listaSamolotow.get(i).getMiejsceParkingowe().getId()};				
     	}
-//    	for (int i = 0; i < this.listaSamolotow.size(); i++) {
-//    		String tab[] = 
-//    	}
 		return tab;	
     }
     

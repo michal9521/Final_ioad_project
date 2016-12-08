@@ -23,7 +23,6 @@ public abstract class Samolot {
 		this.idSamolotu = id;
 		this.listaMiejsc = new ArrayList<MiejsceWSamolocie>();
 		this.status = status.gotowyDoLotu;
-		System.out.println(this.status.toString());
 		this.parkingRef = new MiejsceParkingowe(3, 'A');
 	}
 	
@@ -31,7 +30,6 @@ public abstract class Samolot {
 		this.idSamolotu = id;
 		this.listaMiejsc = new ArrayList<MiejsceWSamolocie>();
 		this.status = status.gotowyDoLotu;
-		System.out.println(this.status.toString());
 		this.parkingRef = new MiejsceParkingowe(3, 'A');
 		this.miasto = miasto;
 		this.idLotu = idLotu;

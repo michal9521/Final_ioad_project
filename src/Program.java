@@ -1,16 +1,15 @@
 import Controller.MySQLAccess;
 import Model.ZarzadzanieSamolotami;
-import WIndow.PanelZarzadzania;
+import WIndow.NoweOkno;
 
 public class Program {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println("Hello Katy!");
 		ZarzadzanieSamolotami zarzadzanie = new ZarzadzanieSamolotami();
 		zarzadzanie.AddPlanes();
 		zarzadzanie.PrzylatujaceSamoloty();
-		PanelZarzadzania okno = new PanelZarzadzania(zarzadzanie);
+		/*NoweOkno okno =*/ new NoweOkno(zarzadzanie);
 		MySQLAccess db = new MySQLAccess();
 	}
 
