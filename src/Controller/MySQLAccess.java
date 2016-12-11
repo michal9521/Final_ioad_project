@@ -172,4 +172,17 @@ public class MySQLAccess {
 		closeDatabaseConnection();
 	}
 	
+	public void updateMiejsceParkingowe(int samolotId, String parking)
+	{
+		openDatabaseConnection();
+		UpdateBuilder<SamolotDB, String> u = planeDao.updateBuilder();
+		try {
+			u.updateColumnValue("miejsce_parkowania_samolotu", parking).where().eq("id_samolotu", samolotId);
+			u.update();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeDatabaseConnection();
+	}
 }

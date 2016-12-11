@@ -3,6 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import Controller.MySQLAccess;
 
@@ -164,6 +165,7 @@ public class ZarzadzanieSamolotami {
     		}
     		Model.status []statusy = {	Model.status.gotowyDoLotu, Model.status.rozladowany, Model.status.zaladowany, Model.status.gotowDoStartu, Model.status.zaparkowany};
 			samolot.setStatusSamolotu(statusy[samolotDB.getStatusSamolotu()-1]);
+			samolot.setParkingRef(new MiejsceParkingowe(samolotDB.getMiejsceParkowaniaSamolotu()));
 			if(!listaSamolotowNaPlycie.contains(samolot)){
 				listaSamolotow.add(samolot);
 			}
@@ -234,6 +236,17 @@ public class ZarzadzanieSamolotami {
     public void zmienStatus(int i, status status){
     	listaSamolotowNaPlycie.get(i).setStatusSamolotu(status);
     	db.UpdateStatus(Integer.parseInt(listaSamolotowNaPlycie.get(i).getSamolotId()), status.ordinal()+1);
+    }
+    
+    public void ustalMiejsceParkingowe(int i){
+    	Random rnd = new Random();
+    	MiejsceParkingowe miejsce = new MiejsceParkingowe(rnd.nextInt(9)+1, (char)(rnd.nextInt(25) + 65));
+    	listaSamolotowNaPlycie.get(i).setParkingRef(miejsce);
+    	db.updateMiejsceParkingowe(Integer.parseInt(listaSamolotowNaPlycie.get(i).getSamolotId()), miejsce.getId());
+    }
+    public void miejsceParkingoweNieDotyczy(int i){
+    	listaSamolotowNaPlycie.get(i).setParkingRef(new MiejsceParkingowe("Nie dotyczy"));
+    	db.updateMiejsceParkingowe(Integer.parseInt(listaSamolotowNaPlycie.get(i).getSamolotId()), "Nie dotyczy");
     }
     
 }

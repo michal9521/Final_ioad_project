@@ -9,6 +9,10 @@ public class MiejsceParkingowe {
 		this.idMiejscaParkigowego += Integer.toString(numer);
 	}	
 	
+	public MiejsceParkingowe(String park){
+		this.idMiejscaParkigowego = park;
+	}
+	
 	public Samolot getSamolotRef(){
 		return this.samolotRef;
 	}

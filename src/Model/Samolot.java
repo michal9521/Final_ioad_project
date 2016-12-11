@@ -5,9 +5,6 @@ import java.util.List;
 
 import com.j256.ormlite.table.DatabaseTable;
 
-//public enum status {
-//	gotowyDoLotu, wyladowywany, zaladowywany, gotowDoStartu, zaparkowany;
-//}
 
 public abstract class Samolot {
 	protected String idSamolotu;

@@ -154,7 +154,9 @@ public class NoweOkno extends JFrame implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getSource() == status1){
-				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.gotowyDoLotu);
+				int i = table.getSelectedRow();
+				zarzadzanie.miejsceParkingoweNieDotyczy(i);
+				zarzadzanie.zmienStatus(i, Model.status.gotowyDoLotu);
 				try {
 					Thread.sleep(1500);
 				} catch (InterruptedException e1) {
@@ -164,7 +166,9 @@ public class NoweOkno extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(this, "Samolot jest gotowy do lotu.");
 			}
 			else if(e.getSource() == status2){
-				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.rozladowany);
+				int i = table.getSelectedRow();
+				zarzadzanie.miejsceParkingoweNieDotyczy(i);
+				zarzadzanie.zmienStatus(i, Model.status.rozladowany);
 				try {
 					Thread.sleep(1500);
 				} catch (InterruptedException e1) {
@@ -175,7 +179,9 @@ public class NoweOkno extends JFrame implements ActionListener{
 				
 			}
 			else if(e.getSource() == status3){
-				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.zaladowany);
+				int i = table.getSelectedRow();
+				zarzadzanie.miejsceParkingoweNieDotyczy(i);
+				zarzadzanie.zmienStatus(i, Model.status.zaladowany);
 				try {
 					Thread.sleep(1500);
 				} catch (InterruptedException e1) {
@@ -185,6 +191,8 @@ public class NoweOkno extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(this, "Samolot zosta³ za³adowany.");			
 			}
 			else if(e.getSource() == status4){
+				int i = table.getSelectedRow();
+				zarzadzanie.miejsceParkingoweNieDotyczy(i);
 				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.gotowDoStartu);
 				try {
 					Thread.sleep(1500);
@@ -195,7 +203,9 @@ public class NoweOkno extends JFrame implements ActionListener{
 				JOptionPane.showMessageDialog(this, "Samolot jest gotowy do startu.");			
 			}
 			else if(e.getSource() == status5){
-				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.zaparkowany);
+				int row = table.getSelectedRow();
+				zarzadzanie.ustalMiejsceParkingowe(row);
+				zarzadzanie.zmienStatus(row, Model.status.zaparkowany);
 				try {
 					Thread.sleep(1500);
 				} catch (InterruptedException e1) {
