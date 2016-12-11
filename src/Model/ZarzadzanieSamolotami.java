@@ -3,17 +3,21 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import Controller.MySQLAccess;
+
 public class ZarzadzanieSamolotami {
 	private static final Object[][] String = null;
 	private List<Samolot> listaSamolotow;
 	private List<MiejsceParkingowe> listaMiejscParkingowych;
 	private List<Samolot> przylatujaceSamoloty;
+	MySQLAccess db;
 	
 	public ZarzadzanieSamolotami() {
 		this.listaSamolotow = new ArrayList<Samolot>();
 		this.listaMiejscParkingowych = new ArrayList<MiejsceParkingowe>();
 		this.przylatujaceSamoloty = new ArrayList<Samolot>();
 		InitMiejscaParkingowe();
+		db = new MySQLAccess();
 	}
 	
 	public void Przylot(Samolot samolot){
@@ -143,4 +147,16 @@ public class ZarzadzanieSamolotami {
     	}
 		return tab;
     }
+    
+    
+    public void odswiezajListesamolotowPrzylatujacych(){
+    	try {
+    	    Thread.sleep(1000);                 //1000 milliseconds is one second.
+    	    //List<Samolot> listaPrzylatujacych = db.getSamolotyListFromDatabase();
+    	    
+    	} catch(InterruptedException ex) {
+    	    Thread.currentThread().interrupt();
+    	}
+    }
+    
 }

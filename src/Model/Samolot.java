@@ -3,9 +3,12 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.j256.ormlite.table.DatabaseTable;
+
 enum status {
 	gotowyDoLotu, wyladowywany, zaladowywany, gotowDoStartu, zaparkowany;
 }
+
 public abstract class Samolot {
 	protected String idSamolotu;
 	protected int iloscMiejsc;
@@ -22,14 +25,14 @@ public abstract class Samolot {
 	public Samolot(String id) {
 		this.idSamolotu = id;
 		this.listaMiejsc = new ArrayList<MiejsceWSamolocie>();
-		this.status = status.gotowyDoLotu;
+		this.status = Model.status.gotowyDoLotu;
 		this.parkingRef = new MiejsceParkingowe(3, 'A');
 	}
 	
 	public Samolot(String id, String miasto, int idLotu) {
 		this.idSamolotu = id;
 		this.listaMiejsc = new ArrayList<MiejsceWSamolocie>();
-		this.status = status.gotowyDoLotu;
+		this.status = Model.status.gotowyDoLotu;
 		this.parkingRef = new MiejsceParkingowe(3, 'A');
 		this.miasto = miasto;
 		this.idLotu = idLotu;

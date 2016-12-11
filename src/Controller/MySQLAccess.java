@@ -15,6 +15,7 @@ import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 
 import Model.Samolot;
+import Model.SamolotDB;
 
 /**
  * Class responsible for the database connection, download and pre-processing of data
@@ -24,15 +25,15 @@ public class MySQLAccess {
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 //	static final String DB_URL = "jdbc:mysql://85.128.223.48:3306/szabat94_2"; // bledy z czasem dostepu na nazwa.pl
-	static final String DB_URL = "jdbc:mysql://localhost:3306/lotnisko";
+	static final String DB_URL = "jdbc:mysql://localhost:8080/lotnisko";
 
-	static final String USER = "root1";
+	static final String USER = "root";
 	static final String PASS = "test123";
 	// Model fields
 
 	private ConnectionSource connectionSource;
 	
-	private Dao<Samolot, String> planeDao;
+	private Dao<SamolotDB, String> planeDao;
 
 	// Game Model Constructor
 	public MySQLAccess() {
@@ -80,17 +81,18 @@ public class MySQLAccess {
 	
 	private void createPlaneDAO() {
 		try {
-			planeDao = DaoManager.createDao(connectionSource, Samolot.class);
+			planeDao = DaoManager.createDao(connectionSource, SamolotDB.class);
 		} catch (SQLException e1) {
 			System.out.println("bbbb");
 		} catch (Exception e){
+			e.printStackTrace();
 			System.out.println("zzz");
 		}
 	}
 	
-	public List<Samolot> getSamolotyListFromDatabase() {
+	public List<SamolotDB> getSamolotyListFromDatabase() {
 		openDatabaseConnection();
-		List<Samolot> samoloty = null;
+		List<SamolotDB> samoloty = null;
 		try {
 			samoloty = planeDao.queryForAll();
 			return samoloty;

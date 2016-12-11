@@ -1,6 +1,6 @@
 import Controller.MySQLAccess;
 import Model.ZarzadzanieSamolotami;
-import WIndow.NoweOkno;
+import Samolot.NoweOkno;
 
 public class Program {
 
@@ -9,8 +9,7 @@ public class Program {
 		ZarzadzanieSamolotami zarzadzanie = new ZarzadzanieSamolotami();
 		zarzadzanie.AddPlanes();
 		zarzadzanie.PrzylatujaceSamoloty();
-		/*NoweOkno okno =*/ new NoweOkno(zarzadzanie);
-		MySQLAccess db = new MySQLAccess();
+		/*NoweOkno okno =*/ new NoweOkno(zarzadzanie, new MySQLAccess());
 	}
 
 }
