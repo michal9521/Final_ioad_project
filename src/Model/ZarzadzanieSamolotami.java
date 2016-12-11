@@ -163,7 +163,9 @@ public class ZarzadzanieSamolotami {
     		}
     		Model.status []statusy = {	Model.status.gotowyDoLotu, Model.status.wyladowywany, Model.status.zaladowywany, Model.status.gotowDoStartu, Model.status.zaparkowany};
 			samolot.setStatusSamolotu(statusy[samolotDB.getStatusSamolotu()-1]);
-			listaSamolotow.add(samolot);
+			if(!listaSamolotowNaPlycie.contains(samolot)){
+				listaSamolotow.add(samolot);
+			}
     	}
     	return listaSamolotow;
     	
@@ -178,12 +180,15 @@ public class ZarzadzanieSamolotami {
     	return null;
     }
     
-    public void pobranieSamolotowPrzylatujacychDoLodzi(){
+    public void pobranieSamolotowWylatujacychZLodzi(){
     	List<Lot> listaLotow = db.getLotyListFromDatabase();
     	List<Samolot> listaSamolotow = pobierzSamolotyZBazy(); 
     	for(Lot lot : listaLotow){
     		if(lot.getMiejsceWylotu().equals("Lodz")){
-    			listaSamolotowNaPlycie.add(wyszukajSamolotPoId(listaSamolotow,Integer.toString(lot.getIdSamolotu())));
+    			Samolot sam = wyszukajSamolotPoId(listaSamolotow,Integer.toString(lot.getIdSamolotu()));
+    			if(!czySamolotNaPlycie(sam)){
+    				listaSamolotowNaPlycie.add(sam);
+    			}
     		}
     	}
     }
@@ -199,4 +204,12 @@ public class ZarzadzanieSamolotami {
 	return tab;	
     }
     
+    private boolean czySamolotNaPlycie(Samolot samolot){
+    	for(Samolot sam : listaSamolotowNaPlycie){
+    		if(sam.getSamolotId().equals(samolot.getSamolotId())){
+    			return true;
+    		}
+    	}
+    	return false;
+    }
 }

@@ -24,7 +24,6 @@ import Model.ZarzadzanieSamolotami;
 public class NoweOkno extends JFrame implements ActionListener{
 	
 	private JButton odswiezListePrzylatujacychButton;
-	private JButton enterPlaneButton;
 	private ZarzadzanieSamolotami zarzadzanie;
 	private JTable table;
 	private JScrollPane scrollPaneGora; 
@@ -78,15 +77,14 @@ public class NoweOkno extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource() == odswiezListePrzylatujacychButton){
-			zarzadzanie.pobranieSamolotowPrzylatujacychDoLodzi();
+		if(e.getSource() == odswiezListePrzylatujacychButton){		
+			for(int n = model.getRowCount()-1;  n >= 0; n--){
+				model.removeRow(n);
+			}
+			zarzadzanie.pobranieSamolotowWylatujacychZLodzi();
 			for(String[] x : zarzadzanie.samolotyNaPlycieDoWyswietlenia()){
 				model.addRow(x);
 			}
 		}
-		if(e.getSource() == enterPlaneButton){
-			
-		}
-		
 	}
 }
