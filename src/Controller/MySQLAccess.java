@@ -157,4 +157,19 @@ public class MySQLAccess {
 			return modele;
 	}
 	
+	 
+	public void UpdateStatus(int samolotId, int status)
+	{
+		openDatabaseConnection();
+		UpdateBuilder<SamolotDB, String> u = planeDao.updateBuilder();
+		try {
+			u.updateColumnValue("status_samolotu", status).where().eq("id_samolotu", samolotId);
+			u.update();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeDatabaseConnection();
+	}
+	
 }

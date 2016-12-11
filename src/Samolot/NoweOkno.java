@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -153,20 +154,57 @@ public class NoweOkno extends JFrame implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getSource() == status1){
-				//(table.getSelectedRow());
+				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.gotowyDoLotu);
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				JOptionPane.showMessageDialog(this, "Samolot jest gotowy do lotu.");
 			}
 			else if(e.getSource() == status2){
-
+				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.rozladowany);
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				JOptionPane.showMessageDialog(this, "Samolot zosta³ roz³adowany.");
+				
 			}
 			else if(e.getSource() == status3){
-
+				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.zaladowany);
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				JOptionPane.showMessageDialog(this, "Samolot zosta³ za³adowany.");			
 			}
 			else if(e.getSource() == status4){
-
+				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.gotowDoStartu);
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				JOptionPane.showMessageDialog(this, "Samolot jest gotowy do startu.");			
 			}
 			else if(e.getSource() == status5){
-
+				zarzadzanie.zmienStatus(table.getSelectedRow(), Model.status.zaparkowany);
+				try {
+					Thread.sleep(1500);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				JOptionPane.showMessageDialog(this, "Samolot zosta³ zaparkowany.");			
 			}
+			odswiezListePrzylatujacychButton.doClick();
 		}
 	}
 }

@@ -162,7 +162,7 @@ public class ZarzadzanieSamolotami {
     		else if(nazwaModelu.equals("Tupolew 204")){
     			samolot = new Tupolew_204(Integer.toString(samolotDB.getIdSamolotu()));
     		}
-    		Model.status []statusy = {	Model.status.gotowyDoLotu, Model.status.wyladowywany, Model.status.zaladowywany, Model.status.gotowDoStartu, Model.status.zaparkowany};
+    		Model.status []statusy = {	Model.status.gotowyDoLotu, Model.status.rozladowany, Model.status.zaladowany, Model.status.gotowDoStartu, Model.status.zaparkowany};
 			samolot.setStatusSamolotu(statusy[samolotDB.getStatusSamolotu()-1]);
 			if(!listaSamolotowNaPlycie.contains(samolot)){
 				listaSamolotow.add(samolot);
@@ -229,6 +229,11 @@ public class ZarzadzanieSamolotami {
     		}
     	}
     	return false;
+    }
+    
+    public void zmienStatus(int i, status status){
+    	listaSamolotowNaPlycie.get(i).setStatusSamolotu(status);
+    	db.UpdateStatus(Integer.parseInt(listaSamolotowNaPlycie.get(i).getSamolotId()), status.ordinal()+1);
     }
     
 }
