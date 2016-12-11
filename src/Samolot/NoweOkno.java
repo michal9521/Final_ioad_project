@@ -71,12 +71,12 @@ public class NoweOkno extends JFrame implements ActionListener{
 		setVisible(true);
 		setTitle("Zarzadzanie Samolotami");
 		
-		//zarzadzanie.pobranieSamolotowPrzylatujacychDoLodzi();
+		table.addMouseListener(new PopClickListener());
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		
 		if(e.getSource() == odswiezListePrzylatujacychButton){
 			zarzadzanie.pobranieSamolotowPrzylatujacychDoLodzi();
