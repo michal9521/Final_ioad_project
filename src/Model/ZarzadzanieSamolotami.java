@@ -10,7 +10,9 @@ public class ZarzadzanieSamolotami {
 	private List<Samolot> listaSamolotow;
 	private List<MiejsceParkingowe> listaMiejscParkingowych;
 	private List<Samolot> przylatujaceSamoloty;
-	MySQLAccess db;
+	private List<Samolot> listaSamolotowNaPlycie;
+
+	private MySQLAccess db;
 	
 	public ZarzadzanieSamolotami() {
 		this.listaSamolotow = new ArrayList<Samolot>();
@@ -18,6 +20,7 @@ public class ZarzadzanieSamolotami {
 		this.przylatujaceSamoloty = new ArrayList<Samolot>();
 		InitMiejscaParkingowe();
 		db = new MySQLAccess();
+		listaSamolotowNaPlycie  = new ArrayList<Samolot>();
 	}
 	
 	public void Przylot(Samolot samolot){
@@ -97,20 +100,6 @@ public class ZarzadzanieSamolotami {
 		Przylot(s3);
 	}
 	
-    String[][] columnNames1 ={ {"Plane Id",
-    		"Model",
-            "Ilosc Miejsc Biznes",
-            "Ilosc Miejsc Eko",
-            "Calk. masa bagazu",
-            "Calk. masa podreczna", "Status", "Miejsce park."}};
-    
-//    {
-//	    {"22d", "Boeing_737", "50", "150", "20000", "2000", "Wolny", "a30"},
-//	    {"22d", "Boeing_737", "50", "150", "20000", "2000", "Wolny", "a30"},
-//	    {"22d", "Boeing_737", "50", "150", "20000", "2000", "Wolny", "a30"},
-//	    {"22d", "Boeing_737", "50", "150", "20000", "2000", "Wolny", "a30"}
-//	};
-    
     public String[][] toTab() {
     	
     	String[][] tab = new String[listaSamolotow.size()][];
@@ -148,15 +137,66 @@ public class ZarzadzanieSamolotami {
 		return tab;
     }
     
-    
-    public void odswiezajListesamolotowPrzylatujacych(){
-    	try {
-    	    Thread.sleep(1000);                 //1000 milliseconds is one second.
-    	    //List<Samolot> listaPrzylatujacych = db.getSamolotyListFromDatabase();
-    	    
-    	} catch(InterruptedException ex) {
-    	    Thread.currentThread().interrupt();
+    private List<Samolot> pobierzSamolotyZBazy(){
+    	
+    	List<Samolot> listaSamolotow = new ArrayList<Samolot>();
+    	Samolot samolot = null;
+    	List<SamolotDB> listaSamolotowDB = db.getSamolotyListFromDatabase();
+    	List<ModeleSamolotow> listaModeleSamolotow = db.getModeleSamolotowListFromDatabase();
+    	for(SamolotDB samolotDB : listaSamolotowDB){
+    		String nazwaModelu = samolotDB.getModelSamolotu().getNazwa();
+    		// stworz faktyczyny samolot dziedziczacy z samolot.
+    		if(nazwaModelu.equals("Airbus A319")){
+    			samolot = new Airbus_A319(Integer.toString(samolotDB.getIdSamolotu()));
+    		}
+    		else if(nazwaModelu.equals("Airbus A380")){
+    			samolot = new Airbus_A380(Integer.toString(samolotDB.getIdSamolotu()));
+    		}
+    		else if(nazwaModelu.equals("Boeing 737")){
+    			samolot = new Boeing_737(Integer.toString(samolotDB.getIdSamolotu()));
+    		}
+    		else if(nazwaModelu.equals("Boeing 787")){
+    			samolot = new Boeing_787(Integer.toString(samolotDB.getIdSamolotu()));
+    		}
+    		else if(nazwaModelu.equals("Tupolew 204")){
+    			samolot = new Tupolew_204(Integer.toString(samolotDB.getIdSamolotu()));
+    		}
+    		Model.status []statusy = {	Model.status.gotowyDoLotu, Model.status.wyladowywany, Model.status.zaladowywany, Model.status.gotowDoStartu, Model.status.zaparkowany};
+			samolot.setStatusSamolotu(statusy[samolotDB.getStatusSamolotu()-1]);
+			listaSamolotow.add(samolot);
     	}
+    	return listaSamolotow;
+    	
+    }
+    
+    private Samolot wyszukajSamolotPoId(List<Samolot> lista, String id){
+    	for(Samolot samolot : lista){
+    		if(samolot.getSamolotId().equals(id)){
+    			return samolot;
+    		}
+    	}
+    	return null;
+    }
+    
+    public void pobranieSamolotowPrzylatujacychDoLodzi(){
+    	List<Lot> listaLotow = db.getLotyListFromDatabase();
+    	List<Samolot> listaSamolotow = pobierzSamolotyZBazy(); 
+    	for(Lot lot : listaLotow){
+    		if(lot.getMiejsceWylotu().equals("Lodz")){
+    			listaSamolotowNaPlycie.add(wyszukajSamolotPoId(listaSamolotow,Integer.toString(lot.getIdSamolotu())));
+    		}
+    	}
+    }
+    
+    public String[][] samolotyNaPlycieDoWyswietlenia(){
+    	String tab[][] = new String[listaSamolotowNaPlycie.size()][];
+    	for (int i = 0; i < this.listaSamolotowNaPlycie.size(); i++) {
+			tab[i] = new String []{ this.listaSamolotowNaPlycie.get(i).getSamolotId(),
+					this.listaSamolotowNaPlycie.get(i).getNazwaModelu(),
+					this.listaSamolotowNaPlycie.get(i).getStatusSamolotu().toString(),
+					this.listaSamolotowNaPlycie.get(i).getMiejsceParkingowe().getId()};				
+    	}
+	return tab;	
     }
     
 }

@@ -7,7 +7,7 @@ public class MiejsceParkingowe {
 	public MiejsceParkingowe(int numer, char znak) {
 		this.idMiejscaParkigowego = new StringBuilder().append("").append(znak).toString();
 		this.idMiejscaParkigowego += Integer.toString(numer);
-	}
+	}	
 	
 	public Samolot getSamolotRef(){
 		return this.samolotRef;

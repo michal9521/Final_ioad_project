@@ -125,4 +125,13 @@ public abstract class Samolot {
 //			if ()
 //		}
 //	}
+	
+
+	@Override
+	public String toString() {
+		return "Samolot [idSamolotu=" + idSamolotu + ", modelSamolotu="
+				+ this.getNazwaModelu() + ", statusSamolotu=" + getStatusSamolotu()
+				+ ", miejsceParkowaniaSamolotu=" + getMiejsceParkingowe().getId()
+				+ "]";
+	}
 }

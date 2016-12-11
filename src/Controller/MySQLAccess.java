@@ -14,6 +14,8 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 
+import Model.Lot;
+import Model.ModeleSamolotow;
 import Model.Samolot;
 import Model.SamolotDB;
 
@@ -34,6 +36,9 @@ public class MySQLAccess {
 	private ConnectionSource connectionSource;
 	
 	private Dao<SamolotDB, String> planeDao;
+	private Dao<Lot, String> lotyDao;
+	private Dao<ModeleSamolotow, String> modeleSamolotowDao;
+
 
 	// Game Model Constructor
 	public MySQLAccess() {
@@ -74,6 +79,8 @@ public class MySQLAccess {
 	 */
 	private void createDAOs() {
 		createPlaneDAO();
+		createLotDAO();
+		createModeleSamolotowDAO();
 //		createSpeciesDAO();
 //		createAnimalDAO();
 //		createHistoryDAO();
@@ -82,6 +89,27 @@ public class MySQLAccess {
 	private void createPlaneDAO() {
 		try {
 			planeDao = DaoManager.createDao(connectionSource, SamolotDB.class);
+		} catch (SQLException e1) {
+			System.out.println("bbbb");
+		} catch (Exception e){
+			e.printStackTrace();
+			System.out.println("zzz");
+		}
+	}
+	
+	private void createLotDAO() {
+		try {
+			lotyDao = DaoManager.createDao(connectionSource, Lot.class);
+		} catch (SQLException e1) {
+			System.out.println("bbbb");
+		} catch (Exception e){
+			e.printStackTrace();
+			System.out.println("zzz");
+		}
+	}
+	private void createModeleSamolotowDAO(){
+		try {
+			modeleSamolotowDao = DaoManager.createDao(connectionSource, ModeleSamolotow.class);
 		} catch (SQLException e1) {
 			System.out.println("bbbb");
 		} catch (Exception e){
@@ -101,6 +129,32 @@ public class MySQLAccess {
 		}
 		closeDatabaseConnection();
 		return samoloty;
+	}
+	
+	public List<Lot> getLotyListFromDatabase() {
+		openDatabaseConnection();
+		List<Lot> loty = null;
+		try {
+			loty = lotyDao.queryForAll();
+			return loty;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeDatabaseConnection();
+		return loty;
+	}
+	
+	public List<ModeleSamolotow> getModeleSamolotowListFromDatabase(){
+			openDatabaseConnection();
+			List<ModeleSamolotow> modele = null;
+			try {
+				modele = modeleSamolotowDao.queryForAll();
+				return modele;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			closeDatabaseConnection();
+			return modele;
 	}
 	
 }
