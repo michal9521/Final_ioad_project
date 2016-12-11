@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import Controller.MySQLAccess;
 import Model.Airbus_A319;
@@ -29,6 +30,7 @@ public class NoweOkno extends JFrame implements ActionListener{
 	private JTable table1;
 	private JTable table2;
 	private String[] columnNames2;
+	private JScrollPane scrollPaneGora; 
 	
 	public NoweOkno(ZarzadzanieSamolotami zarzadzanie, MySQLAccess sql){
 	
@@ -67,7 +69,16 @@ public class NoweOkno extends JFrame implements ActionListener{
 	    table1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 	    table1.setBorder(BorderFactory.createLineBorder(Color.blue));
 	    
-		table2 = new JTable(zarzadzanie.toTab2(), columnNames2);
+	   // JTable table = new JTable(new DefaultTableModel());
+	    DefaultTableModel model = new DefaultTableModel();
+	    model.addColumn(columnNames2[0]);
+	    model.addColumn(columnNames2[1]);
+	    model.addColumn(columnNames2[2]);
+	    table2 = new JTable(model);
+		model = (DefaultTableModel) table2.getModel();
+		for(String[] x : zarzadzanie.toTab2()){
+			model.addRow(x);
+		}
 	    table2.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table2.setBorder(BorderFactory.createLineBorder(Color.red));
 
@@ -82,7 +93,7 @@ public class NoweOkno extends JFrame implements ActionListener{
 		odswiezListePrzylatujacychButton.setFont(new Font("Arial Black", Font.PLAIN, 13));
 		odswiezListePrzylatujacychButton.addActionListener(this);
 		
-		JScrollPane scrollPaneGora = new JScrollPane(table2);
+		scrollPaneGora = new JScrollPane(table2);
 	    scrollPaneGora.setBounds(45, 0, 600, 200);
 
 		JScrollPane scrollPaneDol = new JScrollPane(table1);
@@ -105,26 +116,30 @@ public class NoweOkno extends JFrame implements ActionListener{
 		
 		if(e.getSource() == odswiezListePrzylatujacychButton){
 			List<SamolotDB> listaPrzylatujacych = sqlAccess.getSamolotyListFromDatabase();
+			
+			//table2 = new JTable(zarzadzanie.toTab2(), columnNames2);
+			DefaultTableModel model = (DefaultTableModel) table2.getModel();
+			
 			for (SamolotDB samolotDB : listaPrzylatujacych){
-				String model = samolotDB.getModelSamolotu().getNazwa();
+				System.out.println("1");
+				String modelSamolotu = samolotDB.getModelSamolotu().getNazwa();
 				Samolot samolot = null;
-				if(model.equals("Tupolew")){
+				if(modelSamolotu.equals("Tupolew")){
 					samolot = new Tupolew_204(Integer.toString(samolotDB.getIdSamolotu()), "Lodz", 1);
 				}
-				else if(model.equals("Boeing 737")){
+				else if(modelSamolotu.equals("Boeling 737")){
 					samolot = new Boeing_737(Integer.toString(samolotDB.getIdSamolotu()), "Lodz", 1);
 				}
-				else if(model.equals("MiniSamolot")){
+				else if(modelSamolotu.equals("MiniSamolot")){
 					samolot = new Airbus_A319(Integer.toString(samolotDB.getIdSamolotu()), "Lodz", 1);
 				}
 				zarzadzanie.Przylot(samolot);
+				model.addRow(new Object[] {samolot.getNazwaModelu(), samolot.getMiasto(), Integer.toString(samolot.getIdLotu())});
 			}
-			table2 = new JTable(zarzadzanie.toTab2(), columnNames2);
 		}
 		if(e.getSource() == enterPlaneButton){
 			
 		}
 		
 	}
-
 }

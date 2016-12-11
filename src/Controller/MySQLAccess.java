@@ -25,7 +25,7 @@ public class MySQLAccess {
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
 //	static final String DB_URL = "jdbc:mysql://85.128.223.48:3306/szabat94_2"; // bledy z czasem dostepu na nazwa.pl
-	static final String DB_URL = "jdbc:mysql://localhost:8080/lotnisko";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/lotnisko";
 
 	static final String USER = "root";
 	static final String PASS = "test123";
