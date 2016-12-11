@@ -204,7 +204,7 @@ public class ZarzadzanieSamolotami {
     	List<Lot> listaLotow = db.getLotyListFromDatabase();
     	List<Samolot> listaSamolotow = pobierzSamolotyZBazy(); 
     	for(Lot lot : listaLotow){
-    		if(lot.getMiejsceWylotu().equals("Lodz")){
+    		if(lot.getMiejsceWylotu().equals("Lodz") && lot.getDataWylotu().after(new Date())){
     			Samolot sam = wyszukajSamolotPoId(listaSamolotow,Integer.toString(lot.getIdSamolotu()));
     			if(!czySamolotNaPlycie(sam)){
     				listaSamolotowNaPlycie.add(sam);
@@ -248,5 +248,4 @@ public class ZarzadzanieSamolotami {
     	listaSamolotowNaPlycie.get(i).setParkingRef(new MiejsceParkingowe("Nie dotyczy"));
     	db.updateMiejsceParkingowe(Integer.parseInt(listaSamolotowNaPlycie.get(i).getSamolotId()), "Nie dotyczy");
     }
-    
 }
