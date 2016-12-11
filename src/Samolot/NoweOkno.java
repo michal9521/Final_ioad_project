@@ -82,6 +82,7 @@ public class NoweOkno extends JFrame implements ActionListener{
 				model.removeRow(n);
 			}
 			zarzadzanie.pobranieSamolotowWylatujacychZLodzi();
+			zarzadzanie.pobieranieSamolotowPzylatujacych();
 			for(String[] x : zarzadzanie.samolotyNaPlycieDoWyswietlenia()){
 				model.addRow(x);
 			}

@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import Controller.MySQLAccess;
@@ -180,6 +181,23 @@ public class ZarzadzanieSamolotami {
     	return null;
     }
     
+    public void pobieranieSamolotowPzylatujacych(){
+    	List<Lot> listaLotow = db.getLotyListFromDatabase();
+    	List<Samolot> listaSamolotow = pobierzSamolotyZBazy();
+    	Date dzisiejszaData = new Date();
+    	for(Lot lot : listaLotow){
+    		if(lot.getDataPrzylotu().getDay() == dzisiejszaData.getDay() 
+    				&& lot.getDataPrzylotu().getMonth() == dzisiejszaData.getMonth() 
+    				&& lot.getDataPrzylotu().getYear() == dzisiejszaData.getYear())
+    		{
+    			Samolot sam = wyszukajSamolotPoId(listaSamolotow,Integer.toString(lot.getIdSamolotu()));
+    			if(!czySamolotNaPlycie(sam)){
+    				listaSamolotowNaPlycie.add(sam);
+    			}
+    		}
+    	}
+    }
+    
     public void pobranieSamolotowWylatujacychZLodzi(){
     	List<Lot> listaLotow = db.getLotyListFromDatabase();
     	List<Samolot> listaSamolotow = pobierzSamolotyZBazy(); 
@@ -211,5 +229,5 @@ public class ZarzadzanieSamolotami {
     		}
     	}
     	return false;
-    }
+    }   
 }
