@@ -70,11 +70,21 @@ public class StartWindow extends JFrame {
     });
     btnZarz¹dzajSamolotami.setBounds(169, 213, 200, 35);
     contentPane.add(btnZarz¹dzajSamolotami);
+        
+    JButton btnWyjdz = new JButton("Wyjd\u017A");
+    btnWyjdz.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+      	  System.exit(0);
+        }
+      });
+    btnWyjdz.setBounds(169, 286, 200, 35);
+    contentPane.add(btnWyjdz);
     
     lblTlo = new JLabel();
     lblTlo.setIcon(new ImageIcon("src/Samolot/samolot.jpg"));
-    lblTlo.setBounds(0,0, 543, 430);
+    lblTlo.setBounds(0,0, 527, 391);
     contentPane.add(lblTlo);
+    
 	setTitle("Modu³ Samoloty");
   }
 }
