@@ -138,8 +138,14 @@ public class ZarzadzanieSamolotami {
 		return tab;
     }
     
+    private List<ModeleSamolotow> listaModeliSamolotow;
+    
+    public void dodajSamolotDoBazyDanych(int i){
+    	db.dodajSamolot(listaModeliSamolotow.get(i));
+    }
+    
     public String[][] pobierzZBazyListeModeliSamolotowDoWyswietlenia(){
-    	List<ModeleSamolotow> listaModeliSamolotow = db.getModeleSamolotowListFromDatabase();
+    	listaModeliSamolotow = db.getModeleSamolotowListFromDatabase();
 	    
     	String tab[][] = new String[listaModeliSamolotow.size()][];
     	
@@ -171,9 +177,6 @@ public class ZarzadzanieSamolotami {
     	}
     	return tab;
     }
-    
-    
-    
     
     private List<Samolot> pobierzSamolotyZBazy(){
     	

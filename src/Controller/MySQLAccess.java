@@ -185,4 +185,34 @@ public class MySQLAccess {
 		}
 		closeDatabaseConnection();
 	}
+	
+	public int ostatnieIdSamolotu(){
+		
+		openDatabaseConnection();
+		int lastID = -1;
+	    QueryBuilder<SamolotDB, String> q = planeDao.queryBuilder();
+		try {
+			q.orderBy("id_samolotu", false);
+			lastID = planeDao.queryForFirst(q.prepare()).getIdSamolotu();
+			return lastID;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeDatabaseConnection();
+		return lastID;
+	}
+	
+	public void dodajSamolot(ModeleSamolotow model){
+	
+		int idSamolotu = ostatnieIdSamolotu();
+		
+		openDatabaseConnection();
+		try {
+			SamolotDB plane = new SamolotDB(idSamolotu+1 ,model, 1, "Nie dotyczy");
+			planeDao.create(plane);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		closeDatabaseConnection();
+	}
 }

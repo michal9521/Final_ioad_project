@@ -78,16 +78,18 @@ public class DodajSamolotWindow extends JFrame {
     lblError.setVisible(false);
     JButton btnDodaj = new JButton("Dodaj");
     btnDodaj.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {        
-        if(tblModeleSamolotow.getSelectedRow() == -1){
-        	lblError.setVisible(true);
-        	return;
-        }
-        else {
-        	lblError.setVisible(false);
-        }
-        showMsgDialog();
-      }
+    	public void actionPerformed(ActionEvent e) {        
+    		int wybor = tblModeleSamolotow.getSelectedRow(); 
+    		if(wybor == -1){
+    			lblError.setVisible(true);
+    			return;
+    		}
+    		else {
+    			lblError.setVisible(false);
+    			showMsgDialog();
+    			zarzadzanie.dodajSamolotDoBazyDanych(wybor);
+    		}
+    	}
     });
     btnDodaj.setBounds(41, 360, 141, 35);
     contentPane.add(btnDodaj);
