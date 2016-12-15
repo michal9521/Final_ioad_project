@@ -138,6 +138,43 @@ public class ZarzadzanieSamolotami {
 		return tab;
     }
     
+    public String[][] pobierzZBazyListeModeliSamolotowDoWyswietlenia(){
+    	List<ModeleSamolotow> listaModeliSamolotow = db.getModeleSamolotowListFromDatabase();
+	    
+    	String tab[][] = new String[listaModeliSamolotow.size()][];
+    	
+    	for (int i = 0; i < listaModeliSamolotow.size(); i++) {
+    		
+    		String nazwaModelu = new String(" ");
+    		if(listaModeliSamolotow.get(i).getIdModelu() == 1){
+    			nazwaModelu = "Tupolew 204";
+    		}
+    		
+    		else if(listaModeliSamolotow.get(i).getIdModelu() == 2){
+    			nazwaModelu = "Boeing 737";
+    		}
+    		else if(listaModeliSamolotow.get(i).getIdModelu() == 3){
+    			nazwaModelu = "Boeing 787";
+    		}
+    		else if(listaModeliSamolotow.get(i).getIdModelu() == 4){
+    			nazwaModelu = "Airbus A319";
+    		}
+    		else if(listaModeliSamolotow.get(i).getIdModelu() == 5){
+    			nazwaModelu = "Airbus A380";
+    		}
+    			
+    			
+			tab[i] = new String []{ nazwaModelu,
+									Integer.toString(listaModeliSamolotow.get(i).getCalkowitaMasaPodreczna()),
+									Integer.toString(listaModeliSamolotow.get(i).getCalkowitaMasaBagazu()),
+									Integer.toString(listaModeliSamolotow.get(i).getIloscMiejsc())};				
+    	}
+    	return tab;
+    }
+    
+    
+    
+    
     private List<Samolot> pobierzSamolotyZBazy(){
     	
     	List<Samolot> listaSamolotow = new ArrayList<Samolot>();

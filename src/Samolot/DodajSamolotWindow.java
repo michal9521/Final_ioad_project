@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import Model.ZarzadzanieSamolotami;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JEditorPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -28,6 +29,8 @@ import java.awt.Font;
 public class DodajSamolotWindow extends JFrame {
 
   private JPanel contentPane;
+  private DefaultTableModel defTblModel = new DefaultTableModel();
+
 
   /**
    * Create the frame.
@@ -42,11 +45,15 @@ public class DodajSamolotWindow extends JFrame {
     contentPane.setLayout(null);
 	setTitle("Dodawanie samolów");
     
-    DefaultTableModel defTblModel = new DefaultTableModel();
+     defTblModel = new DefaultTableModel();
     defTblModel.addColumn("Nazwa");
     defTblModel.addColumn("Calkowita masa podreczna");
     defTblModel.addColumn("Calkowita masa baga¿u");
     defTblModel.addColumn("Iloœæ miejsc");
+    
+    for(String[] x : zarzadzanie.pobierzZBazyListeModeliSamolotowDoWyswietlenia()){
+    	defTblModel.addRow(x);
+	}
     
     JTable tblModeleSamolotow = new JTable(defTblModel);
     defTblModel = (DefaultTableModel) tblModeleSamolotow.getModel();
@@ -55,8 +62,13 @@ public class DodajSamolotWindow extends JFrame {
     tblModeleSamolotow.setBorder(BorderFactory.createLineBorder(Color.blue));
     
     JScrollPane scrlPane = new JScrollPane(tblModeleSamolotow);
-    scrlPane.setBounds(5, 5, 575, 200);
+    scrlPane.setBounds(5, 50, 575, 200);
     contentPane.add(scrlPane);
+    
+    JLabel lblInfo = new JLabel("Lista dostêpnych modeli samolotów");
+    lblInfo.setBounds(20,5, 500, 26);
+    lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 20));
+    contentPane.add(lblInfo);
     
     JLabel lblError = new JLabel("Musisz wybraæ samolot!");
     lblError.setForeground(Color.RED);
@@ -64,7 +76,6 @@ public class DodajSamolotWindow extends JFrame {
     lblError.setBounds(192, 246, 236, 26);
     contentPane.add(lblError);
     lblError.setVisible(false);
-    
     JButton btnDodaj = new JButton("Dodaj");
     btnDodaj.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {        
@@ -75,6 +86,7 @@ public class DodajSamolotWindow extends JFrame {
         else {
         	lblError.setVisible(false);
         }
+        showMsgDialog();
       }
     });
     btnDodaj.setBounds(41, 360, 141, 35);
@@ -90,5 +102,10 @@ public class DodajSamolotWindow extends JFrame {
     contentPane.add(btnWyjcie);
     
     
+  }
+  
+  private void showMsgDialog(){
+		JOptionPane.showMessageDialog(this, "Samolot zosta³ dodany do bazy danych.");
+
   }
 }
