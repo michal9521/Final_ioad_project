@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import Controller.MySQLAccess;
 import Model.ZarzadzanieSamolotami;
 
-public class NoweOkno extends JFrame implements ActionListener{
+public class Zarz¹dzanieSamolotamiWindow extends JFrame implements ActionListener{
 	
 	private JButton odswiezListePrzylatujacychButton;
 	private ZarzadzanieSamolotami zarzadzanie;
@@ -34,11 +34,11 @@ public class NoweOkno extends JFrame implements ActionListener{
 	private DefaultTableModel model;
 	private JLabel tlo = new JLabel("");
 		
-	public NoweOkno(ZarzadzanieSamolotami zarzadzanie, MySQLAccess sql){
+	public Zarz¹dzanieSamolotamiWindow(ZarzadzanieSamolotami zarzadzanie){
 	
 		this.zarzadzanie = zarzadzanie;
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		
@@ -94,7 +94,9 @@ public class NoweOkno extends JFrame implements ActionListener{
 		        menu.show(e.getComponent(), e.getX(), e.getY());
 		    }
 		});
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);	
+		
+		odswiezListePrzylatujacychButton.doClick();
 	}
 		
 	@Override
