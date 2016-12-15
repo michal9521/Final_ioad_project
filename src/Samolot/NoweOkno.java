@@ -6,9 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.io.LineNumberInputStream;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,11 +22,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.MySQLAccess;
-import Model.Airbus_A319;
-import Model.Boeing_737;
-import Model.Samolot;
-import Model.SamolotDB;
-import Model.Tupolew_204;
 import Model.ZarzadzanieSamolotami;
 
 public class NoweOkno extends JFrame implements ActionListener{

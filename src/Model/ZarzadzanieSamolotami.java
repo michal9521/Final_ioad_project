@@ -8,7 +8,6 @@ import java.util.Random;
 import Controller.MySQLAccess;
 
 public class ZarzadzanieSamolotami {
-	private static final Object[][] String = null;
 	private List<Samolot> listaSamolotow;
 	private List<MiejsceParkingowe> listaMiejscParkingowych;
 	private List<Samolot> przylatujaceSamoloty;
