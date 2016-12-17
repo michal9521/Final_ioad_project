@@ -51,14 +51,21 @@ public class Zarz¹dzanieSamolotamiWindow extends JFrame implements ActionListene
 	    model.addColumn(nazwyKolumn[2]);
 	    model.addColumn(nazwyKolumn[3]);
 	    
-	    table = new JTable(model);
+	    table = new JTable(model){
+	    	private static final long serialVersionUID = 1L;
+
+	        public boolean isCellEditable(int row, int column) {                
+	                return false;               
+	        };
+	    };
 		model = (DefaultTableModel) table.getModel();
 		for(String[] x : zarzadzanie.samolotyNaPlycieDoWyswietlenia()){
 			model.addRow(x);
 		}
 	    table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setBorder(BorderFactory.createLineBorder(Color.red));
-		
+		table.getTableHeader().setReorderingAllowed(false);
+
 		odswiezListePrzylatujacychButton = new JButton("Odswiez");
 		odswiezListePrzylatujacychButton.setVisible(true);
 		odswiezListePrzylatujacychButton.setBounds(45, 205, 150, 40);
@@ -94,7 +101,7 @@ public class Zarz¹dzanieSamolotamiWindow extends JFrame implements ActionListene
 		        menu.show(e.getComponent(), e.getX(), e.getY());
 		    }
 		});
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);	
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		odswiezListePrzylatujacychButton.doClick();
 	}

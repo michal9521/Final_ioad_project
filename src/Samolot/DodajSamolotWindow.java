@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -55,11 +56,18 @@ public class DodajSamolotWindow extends JFrame {
     	defTblModel.addRow(x);
 	}
     
-    JTable tblModeleSamolotow = new JTable(defTblModel);
+    JTable tblModeleSamolotow = new JTable(defTblModel){
+    	private static final long serialVersionUID = 1L;
+
+        public boolean isCellEditable(int row, int column) {                
+                return false;               
+        };
+    };
     defTblModel = (DefaultTableModel) tblModeleSamolotow.getModel();
     tblModeleSamolotow.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-    
+    tblModeleSamolotow.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);	
     tblModeleSamolotow.setBorder(BorderFactory.createLineBorder(Color.blue));
+    tblModeleSamolotow.getTableHeader().setReorderingAllowed(false);
     
     JScrollPane scrlPane = new JScrollPane(tblModeleSamolotow);
     scrlPane.setBounds(5, 50, 575, 200);
